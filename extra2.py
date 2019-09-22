@@ -44,3 +44,30 @@ def extra2():
         # cur: current_player
         # Counting from 1
         cur=turns%player+1
+
+        # current_player acting
+        while ((turns % player + 1) == cur):
+            print('Current player is player', cur)
+
+            # To choose a victim
+            victim = choice(range(1, 1 + player))
+            while victim == cur:
+                victim = choice(range(1, 1 + player))
+            print('The chosen victim is: player', victim)
+
+            # To determine the target rank
+            temp = []
+            for i in players[cur].hand.keys():
+                if players[cur].hand[i] != []:
+                    temp.append(i)
+            if temp == []:
+                # There must be no card left in the pool
+                if not deplete:
+                    raise RuntimeError
+                else:
+                    # Next player's turn
+                    turns += 1
+                    continue
+
+            cardrank = choice(temp)
+            print('The chosen cardrank is:', cardrank)
