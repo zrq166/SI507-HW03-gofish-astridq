@@ -71,3 +71,35 @@ def extra2():
 
             cardrank = choice(temp)
             print('The chosen cardrank is:', cardrank)
+
+            # To get cards from the victim
+            if players[victim].check(cardrank):
+                for i in range(len(players[victim].hand[cardrank])):
+                    players[cur].add(players[victim].remove(cardrank))
+                print('Player', cur, 'found the target card from player ',victim)
+                # Immediately update
+                players[cur].update_bookstate()
+
+                # if current players's hand is empty:
+                if list(players[cur].hand.values()).count([])==13:
+                    if not deplete:
+                        try:
+                            for i in range(7):
+                                drawcard = totalDeck.pop_card()
+                                players[cur].add(drawcard)
+                                deplete = (len(totalDeck.cards) == 0)
+                        except:
+                            deplete=True
+
+                # if victim's hand is empty:
+                if list(players[victim].hand.values()).count([])==13:
+                    if not deplete:
+                        try:
+                            for i in range(7):
+                                drawcard = totalDeck.pop_card()
+                                players[victim].add(drawcard)
+                                deplete = (len(totalDeck.cards) == 0)
+                        except:
+                            deplete=True
+            else:
+                pass
