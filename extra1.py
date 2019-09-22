@@ -39,5 +39,28 @@ def extra1():
     turns = 1  # turns 1 means player1,  2 means player2
     roundd = 1
 
+    while True:
+        print("* * * * * Round " + str(roundd) + " * * * * * * * ")
+        print("totolDeck info")
+        print("* * * * * * * * * * * * ")
+        for i in totalDeck.cards:
+            print(i.__str__())
+        print("\n* * * * * * * * * * * * ")
+        print("player1 info")
+        for i in range(1, 14):
+            for j in player1.hand[i]:
+                print(j)
+        print("book: " + str(player1.book))
+        print("\n* * * * * * * * * * * * ")
+        print("player2 info")
+        for i in range(1, 14):
+            for j in player2.hand[i]:
+                print(j)
+        print("book: " + str(player2.book))
+        print("* * * * * * * * * * * * ")
+
+        if (len(totalDeck.cards) == 0) & (player1.book + player2.book == 13):
+            break
+
 if __name__=='__main__':
     extra1()
