@@ -62,5 +62,65 @@ def extra1():
         if (len(totalDeck.cards) == 0) & (player1.book + player2.book == 13):
             break
 
+        if turns == 1:
+        # player1 asks
+            cardrank = input(
+                "player1: Please choose a card rank you would like to ask the other player if they have (between 1-13):\n")
+            cardrank.strip('\n')
+            try:
+                cardrank = int(cardrank)
+
+            except ValueError:
+                print("ValueError")
+                continue
+
+            try:
+                if player2.check(cardrank):
+                    turns = 1
+                    for i in range(len(player2.hand[cardrank])):
+                        player1.add(player2.remove(cardrank))
+                else:
+                    print("GO Fish\n")
+                    turns = 2
+                    drawcard = totalDeck.pop_card()
+                    player1.add(drawcard)
+            except KeyError:
+                print("Key is not valid")
+                continue
+
+            if player1.update_bookstate():
+                turns = 1
+        
+        else:
+            # player2 asks
+            cardrank = input(
+                "player2: Please choose a card rank you would like to ask the other player if they have (between 1-13):\n")
+            cardrank.strip('\n')
+            try:
+                cardrank = int(cardrank)
+            except ValueError:
+                print("ValueError")
+                continue
+
+            try:
+                if player1.check(cardrank):
+                    turns = 2
+                    for i in range(len(player1.hand[cardrank])):
+                        player2.add(player1.remove(cardrank))
+                else:
+                    print("GO Fish\n")
+                    turns = 1
+                    drawcard = totalDeck.pop_card()
+                    player2.add(drawcard)
+
+            except KeyError:
+                print("Key is not valid")
+                continue
+
+            if player2.update_bookstate():
+                turns = 2
+
+        roundd += 1
+
 if __name__=='__main__':
     extra1()
