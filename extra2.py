@@ -102,4 +102,24 @@ def extra2():
                         except:
                             deplete=True
             else:
-                pass
+                turns += 1
+                if not deplete:
+                    print("GO Fish\n")
+                    drawcard = totalDeck.pop_card()
+                    players[cur].add(drawcard)
+                    if drawcard.rank==cardrank:
+                        turns-=1
+                    deplete = (len(totalDeck.cards) == 0)
+
+                # Immediately update
+                # if current players's hand is empty:
+                players[cur].update_bookstate()
+                if list(players[cur].hand.values()).count([])==13:
+                    if not deplete:
+                        try:
+                            for i in range(7):
+                                drawcard = totalDeck.pop_card()
+                                players[cur].add(drawcard)
+                                deplete = (len(totalDeck.cards) == 0)
+                        except:
+                            deplete=True
