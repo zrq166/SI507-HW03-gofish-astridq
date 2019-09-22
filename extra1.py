@@ -81,9 +81,12 @@ def extra1():
                         player1.add(player2.remove(cardrank))
                 else:
                     print("GO Fish\n")
-                    turns = 2
                     drawcard = totalDeck.pop_card()
                     player1.add(drawcard)
+                    if drawcard.rank_num == cardrank:
+                        turns = 1
+                    else:
+                        turns = 2
             except KeyError:
                 print("Key is not valid")
                 continue
@@ -109,9 +112,12 @@ def extra1():
                         player2.add(player1.remove(cardrank))
                 else:
                     print("GO Fish\n")
-                    turns = 1
                     drawcard = totalDeck.pop_card()
                     player2.add(drawcard)
+                    if drawcard.rank_num == cardrank:
+                        turns = 2
+                    else:
+                        turns = 1
 
             except KeyError:
                 print("Key is not valid")
@@ -121,6 +127,11 @@ def extra1():
                 turns = 2
 
         roundd += 1
-
+    if player1.book > player2.book:
+        print("player1 wins")
+    elif player1.book == player2.book:
+        print("Tie")
+    else:
+        print("player2 wins")
 if __name__=='__main__':
     extra1()
