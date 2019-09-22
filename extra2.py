@@ -29,3 +29,18 @@ def extra2():
 
     turns = 0
     deplete = False
+    while True:
+        print("* * * * * Round " + str(turns) + " * * * * * * * ")
+
+        # Checking conditions for end game
+        if (len(totalDeck.cards) == 0):
+            deplete = True
+            temp=0
+            for i in players.values():
+                temp+=i.book
+            if temp==13:
+                break
+
+        # cur: current_player
+        # Counting from 1
+        cur=turns%player+1
