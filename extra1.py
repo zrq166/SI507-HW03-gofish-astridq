@@ -30,4 +30,14 @@ class Player:
     def add(self, card):
         self.hand[card.rank_num].append(card)
 
+def extra1():
+    totalDeck = cards3.Decknew()
+    totalDeck.shuffle()
+    handlist = totalDeck.deal(2, 7)
+    player1 = Player(handlist[0].handcards)
+    player2 = Player(handlist[1].handcards)
+    turns = 1  # turns 1 means player1,  2 means player2
+    roundd = 1
 
+if __name__=='__main__':
+    extra1()
