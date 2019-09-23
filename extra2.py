@@ -123,3 +123,15 @@ def extra2():
                                 deplete = (len(totalDeck.cards) == 0)
                         except:
                             deplete=True
+
+    # info
+    for _ in range(1,player+1):
+        print("player"+str(_)+" info")
+        for i in range(1, 14):
+            for j in players[_].hand[i]:
+                print(j)
+        print("book: " + str(players[_].book))
+        print("\n* * * * * * * * * * * * ")
+
+if __name__=='__main__':
+    extra2()
